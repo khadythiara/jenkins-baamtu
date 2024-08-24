@@ -17,3 +17,4 @@ public class WorksWithHerokuServlet extends HttpServlet {
         writer.close();
     }
 }
+
