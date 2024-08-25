@@ -30,7 +30,8 @@ stage('build') {
                 sh 'ls -la'
                 sh 'pwd'
                 //sh "cd target/classes/works/buddy/samples/ && java works.buddy.samples.WorksWithHerokuServlet"
-                sh 'java -cp target/classes WorksWithHerokuServlet'
+                sh 'java -cp target/classes com.example.WorksWithHerokuServlet'
+
                 
             }
             }
