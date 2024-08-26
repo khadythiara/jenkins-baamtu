@@ -22,9 +22,11 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('latest')
+          //docker.withRegistry( '', registryCredential )
+          docker.withRegistry('https://registry-1.docker.io/', 'dockerhub') {
+                  docker.image('openjdk:17-jdk-slim').pull()
+                  dockerImage.push("$BUILD_NUMBER")
+                  dockerImage.push('latest')
 
           }
         }
