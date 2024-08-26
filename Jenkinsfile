@@ -1,12 +1,12 @@
 pipeline {
   environment {
-    imagename = "khadydiagne/push_jenkins"
-    registryCredential = 'simple-java-project'
+    imagename = "khadydiagne/mon_app"
+    registryCredential = 'dockerhub'
     dockerImage = ''
   }
   agent any
   stages {
-    stage('Cloning Git') {
+    stage('Clone') {
       steps {
         git([url: 'https://github.com/khadythiara/jenkins-baamtu.git', branch: 'main'])
 
