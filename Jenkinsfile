@@ -31,11 +31,23 @@ pipeline {
       }
     }
     
+    stage('Remove Existing Container') {
+    steps {
+        script {
+            def containerExists = sh(script: "docker ps -a --filter 'name=simple_app_java' --format '{{.Names}}'", returnStdout:          
+            true).trim()
+            if (containerExists) {
+                sh 'docker rm -f simple_app_java'
+            }
+        }
+    }
+}
+    
      stage('Run Docker Container') {
           steps {
               script {
                     // Exécution du conteneur Docker
-                    dockerImage.run("-d --name simple_app_java -p 8080:80")
+                    dockerImage.run("-d --name simple_app_java -p 8080:80 imagename")
                 }
             }
         }
