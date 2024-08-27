@@ -19,7 +19,7 @@ pipeline {
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Push Image') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -31,18 +31,7 @@ pipeline {
       }
     }
     
-    stage('Remove Existing Container') {
-    steps {
-        script {
-            def containerExists = sh(script: "docker ps -a --filter 'name=simple_app_java' --format '{{.Names}}'", returnStdout:          
-            true).trim()
-            if (containerExists) {
-                sh 'docker rm -f simple_app_java'
-            }
-        }
-    }
-}
-    
+ 
      stage('Run Docker Container') {
           steps {
               script {
