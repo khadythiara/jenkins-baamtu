@@ -22,4 +22,3 @@ EXPOSE 8080
 
 # Commande pour exécuter l'application
 CMD ["java", "-jar", "/usr/app/app.jar"]
-
