@@ -30,6 +30,15 @@ pipeline {
         }
       }
     }
+    
+     stage('Run Docker Container') {
+          steps {
+              script {
+                    // Exécution du conteneur Docker
+                    dockerImage.run("-d --name simple_app_java -p 8084:80")
+                }
+            }
+        }
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $imagename:$BUILD_NUMBER"
