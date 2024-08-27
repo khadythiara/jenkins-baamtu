@@ -35,7 +35,7 @@ pipeline {
           steps {
               script {
                     // Exécution du conteneur Docker
-                    dockerImage.run("-d --name simple_app_java -p 8084:80")
+                    dockerImage.run("-d --name simple_app_java -p 8080:80")
                 }
             }
         }
