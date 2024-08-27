@@ -1,30 +1,30 @@
 pipeline {
   environment {
-    imagename = "khadydiagne/mon_app"
-    registryCredential = 'dockerhub'
+    imagename = "khadydiagne/push_jenkins"
+    registryCredential = 'simple-java-project'
     dockerImage = ''
   }
   agent any
   stages {
-    stage('Clone') {
+    stage('Cloning Git') {
       steps {
         git([url: 'https://github.com/khadythiara/jenkins-baamtu.git', branch: 'main'])
 
       }
     }
-    stage('Build image') {
+    stage('Building image') {
       steps{
         script {
           dockerImage = docker.build(imagename, ".")
         }
       }
     }
-    stage('push Image') {
+    stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ){
-                  dockerImage.push("$BUILD_NUMBER")
-                  dockerImage.push('latest')
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("$BUILD_NUMBER")
+             dockerImage.push('latest')
 
           }
         }
