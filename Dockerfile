@@ -1,5 +1,5 @@
 # Étape 1 : Utiliser une image Maven pour compiler l'application
-FROM maven:3.9.9-eclipse-temurin-17 AS build
+FROM maven:3.9.9-openjdk-17 AS build
 
 # Copier le code source dans l'image
 COPY src /usr/src/app/src
