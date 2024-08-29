@@ -15,7 +15,7 @@ RUN mvn clean package
 FROM openjdk:17-jdk-slim
 
 # Copier le JAR compilé de l'étape précédente
-COPY --from=build /usr/src/target/*.war /usr/app/app.war
+COPY --from=build /usr/src/app/target/*.war /usr/app/app.war
 
 # Exposer le port de l'application
 EXPOSE 8080
