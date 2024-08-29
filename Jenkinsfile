@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    imagename = "khadydiagne/jenkins-push"
+    imagename = "khadydiagne/simple-java-app"
     registryCredential = 'simple-java-project'
     dockerImage = ''
   }
