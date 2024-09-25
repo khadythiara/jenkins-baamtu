@@ -24,7 +24,6 @@ pipeline {
           dockerImage = docker.build(imagename, ".")
         }
       }
-    }
 stage('SonarQube Analysis') {
     def mvn = tool 'Default Maven';
     withSonarQubeEnv() {
