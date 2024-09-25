@@ -3,6 +3,12 @@ pipeline {
     imagename = "khadydiagne/simple-java-app"
     registryCredential = 'simple-java-project'
     dockerImage = ''
+
+        // Propriétés SonarQube
+        SONAR_PROJECT_KEY = 'test_java'
+        SONAR_HOST_URL = 'http://localhost:9000/'
+        SONAR_TOKEN = credentials('sonarqube') // Jeton SonarQube
+    
   }
   agent any
   stages {
