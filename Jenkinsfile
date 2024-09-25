@@ -19,6 +19,13 @@ pipeline {
         }
       }
     }
+       stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh './mvnw sonar:sonar -Dsonar.projectKey=test_java -Dsonar.java.binaries=target/sonar'
+                }
+            }
+        }
     stage('Push Image') {
       steps{
         script {
