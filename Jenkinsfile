@@ -25,13 +25,12 @@ pipeline {
         }
       }
     }
-       stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh './mvnw sonar:sonar -Dsonar.projectKey=test_java -Dsonar.java.binaries=target/sonar'
-                }
-            }
-        }
+stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
+    withSonarQubeEnv() {
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=TEST -Dsonar.projectName='TEST'"
+    }
+  }
     stage('Push Image') {
       steps{
         script {
