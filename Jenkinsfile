@@ -5,7 +5,7 @@ pipeline {
     dockerImage = ''
 
     // Propriétés SonarQube
-    SONAR_PROJECT_KEY = 'test_java'
+    SONAR_PROJECT_KEY = 'TEST'
     SONAR_HOST_URL = 'http://localhost:9000/'
     SONAR_TOKEN = credentials('sonarqube') // Jeton SonarQube
   }
