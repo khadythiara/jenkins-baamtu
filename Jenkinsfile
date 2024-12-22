@@ -1,54 +1,34 @@
 pipeline {
-  environment {
-    imagename = "khadydiagne/simple-java-app"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-
-    // Propriétés SonarQube
-    //SONAR_PROJECT_KEY = 'TEST'
-    //SONAR_HOST_URL = 'http://localhost:9000/'
-   // SONAR_TOKEN = credentials('sonarqube') // Jeton SonarQube
-  }
-  agent any
-  stages {
-    stage('Cloning Git') {
-      steps {
-        git([url: 'https://github.com/khadythiara/jenkins-baamtu.git', branch: 'main'])
-      }
+    environment {
+        imagename = "khadydiagne/simple-java-app"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+        BUILD_NUMBER = "${env.BUILD_NUMBER}"
     }
-
-    stage('Building image') {
-      steps {
-        script {
-          dockerImage = docker.build(imagename, ".")
+    agent any
+    stages {
+        stage('Cloning Git') {
+            steps {
+                git([url: 'https://github.com/khadythiara/jenkins-baamtu.git', branch: 'main'])
+            }
         }
-      }
-    }
-    stage('Push Image') {
-      steps {
-        script {
-          docker.withRegistry('', registryCredential) {
-            dockerImage.push("$BUILD_NUMBER")
-            dockerImage.push('latest')
-          }
+        stage('Building image') {
+            steps {
+                script {
+                    dockerImage = docker.build(imagename, ".")
+                }
+            }
         }
-      }
-    }
-
-    stage('Run Docker Container') {
-      steps {
-        script {
-          // Exécution du conteneur Docker
-          dockerImage.run("-d -p 8087:80")
+        stage('Push Image') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                    }
+                }
+            }
         }
-      }
-    }
 
-    stage('Remove Unused docker image') {
-      steps {
-        sh "docker rmi -f $imagename:$BUILD_NUMBER"
-        sh "docker rmi -f $imagename:latest"
-      }
     }
-  }
 }
