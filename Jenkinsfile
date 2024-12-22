@@ -1,7 +1,7 @@
 pipeline {
   environment {
     imagename = "khadydiagne/simple-java-app"
-    registryCredential = 'simple-java-project'
+    registryCredential = 'dockerhub'
     dockerImage = ''
 
     // Propriétés SonarQube
